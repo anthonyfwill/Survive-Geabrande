@@ -22,5 +22,6 @@ function draw() {
   stroke('red');
   ellipse(320, 100, size);
   strokeWeight(1);
-  triangle(10, 50, 20, 20, 30, 30)
+  rotate(PI/2);
+  triangle(10, 50, 20, 20, 30, 30);
 }
