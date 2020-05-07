@@ -21,4 +21,6 @@ function draw() {
   ellipse(265, 150, size);
   stroke('red');
   ellipse(320, 100, size);
+  strokeWeight(1);
+  triangle(10, 50, 20, 20, 30, 30)
 }
