@@ -1,13 +1,13 @@
 /* global createCanvas background ellipse */
 
-function setup(){
+function setup() {
   // Code here runs only once
-  createCanvas(800, 600)
+  createCanvas(800, 600);
 }
 
-function draw(){
+function draw() {
   // Code here runs continuously
-  background(220)
-  
+  background(220);
+
   // ellipse(50, 50, 50, 50)
 }
