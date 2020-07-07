@@ -5,7 +5,7 @@ let dvdImage;
 function setup(){
   createCanvas(800, 600);
   // We only want to load the logo once.
-  dvdImage = loadImage("https://cdn.glitch.com/eaea72a4-ac6d-4777-b76e-f37d75959aa5%2Fdvd.jpeg?1515761833387");
+  dvdImage = loadImage("https://cdn.glitch.com/2c8c05ca-f0b5-426e-9d1a-07a2d87bd9f6%2Fdvd-video.jpeg?v=1594094901767");
 }
 
 function draw(){
