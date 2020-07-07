@@ -1,6 +1,6 @@
 /* global createCanvas background image loadImage */
 
-let dvdImage, imageX, xVelocity;
+let dvdImage, imageX, xVelocity, imageY, yVelocity;
 
 function setup(){
   createCanvas(400, 400);
@@ -21,5 +21,13 @@ function draw(){
     xVelocity = -3;
   } else if (imageX < 0) {
     xVelocity = 3;
+  }
+  
+  imageY += yVelocity;
+  
+  if (imageY < 200) {
+    yVelocity = -3;
+  } else if (imageY < 0) {
+    yVelocity = 3;
   }
 }
