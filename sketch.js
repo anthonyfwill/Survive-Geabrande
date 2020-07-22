@@ -89,7 +89,7 @@ function dvdSketchMk2(p) {
   };
 }
 
-let mySketch = new p5(dvdSketch, 'my-canvas');
+let mySketch = new p5(dvdSketch);
 let mySketch2 = new p5(dvdSketchMk2);
 
 mySketch.masterVelocity = 10;
