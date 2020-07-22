@@ -52,7 +52,8 @@ function dvdSketchMk2(p) {
     imageHeight = 150;
 
   p.setup = () => {
-    p.createCanvas(300, 300);
+    p.cvs = p.createCanvas(300, 300);
+    p.cvs.class('top-canvas');
 
     imageX = 0;
     imageY = 0;
@@ -67,7 +68,7 @@ function dvdSketchMk2(p) {
   };
 
   p.draw = () => {
-    p.background(220, 0, 0);
+    p.clear();
     // Draw the logo at the new position.
     p.image(dvdImage, imageX, imageY, imageWidth, imageHeight);
 
@@ -91,5 +92,3 @@ function dvdSketchMk2(p) {
 
 let mySketch = new p5(dvdSketch);
 let mySketch2 = new p5(dvdSketchMk2);
-
-mySketch.masterVelocity = 10;
