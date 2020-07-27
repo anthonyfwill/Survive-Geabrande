@@ -10,6 +10,8 @@ let spaceship,
   bulletalien1,
   bulletalien2,
   bulletspaceship,
+    hit,
+    exist,
     lasers;
 
 function preload() {}
@@ -32,10 +34,16 @@ function draw() {
   background(0);
   enemy.Ashow();
   player.show();
-  for(var i = 0; i< lasers.length; i++){
-    lasers[i].show();
-    lasers[i].update();
+  for(var i = lasers.length - 1; i > 0; i--){
+    if(lasers[i].exist === true){
+      lasers[i].show();
+      lasers[i].update();
+    }
     
+    if(lasers[i].y <= 0){
+      lasers[i].exist = false;
+      lasers[i].splice(i, 1);
+    }
   }
 }
 
@@ -62,20 +70,25 @@ function Ship() {
     fill(255);
     image(spaceship, this.x, this.y, this.scl, this.scl);
     // rect(this.x, this.y, this.scl ,this.scl);
-    this.x += this.v;
+    
+    if(this.x >= -100){
+      this.x += this.v;
+    }
   };
 }
 
 function Laser(xpos) {
-  this.x = xpos+3;
+  this.exist = true;
+  this.x = xpos+25;
   this.y = windowHeight - player.scl;
   this.v = -5;
   this.update = function(){
     this.y += this.v;
+    
   };
   this.show = function(){
     stroke(255);
-    strokeWeight(2);
+    strokeWeight(4);
     point(this.x, this.y);
   }
 }
@@ -84,8 +97,16 @@ function Alien() {
   this.Ax = 200;
   this.Ay = 0;
   this.Ascl = 100;
-
+  this.health = 100;
   this.Ashow = function() {
     image(alien, this.Ax, this.Ay, this.Ascl, this.Ascl);
   };
+  this.update = function(){
+    hit = false;
+    for(var i = 0; i< lasers.length; i++){
+      if(lasers[i].x < this.Ax+ this.Ascl && lasers[i].x > this.Ax && lasers[i].y <= this.Ay+this.Ascl){
+        hit = true;
+      }
+    }
+  }
 }
