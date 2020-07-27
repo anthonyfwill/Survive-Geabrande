@@ -9,21 +9,18 @@ let spaceship,
   enemy,
   bulletalien1,
   bulletalien2,
-  bulletspaceship,
-    hit,
-   
-    lasers;
+  hit,
+  lasers;
 
 function preload() {}
 
 function setup() {
-  
   createCanvas(windowWidth, windowHeight);
   lasers = [];
   spaceship = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F8-bit-spaceship-png-1.png?v=1595872548652"
   );
-  
+
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
@@ -35,14 +32,11 @@ function draw() {
   background(0);
   enemy.Ashow();
   player.show();
-  for(var i = lasers.length - 1; i > 0; i--){
-    
-      lasers[i].show();
-      lasers[i].update();
-    
-    
-    if(lasers[i].y <= 0){
-      
+  for (var i = lasers.length - 1; i > 0; i--) {
+    lasers[i].show();
+    lasers[i].update();
+
+    if (lasers[i].y <= 0) {
       lasers.splice(i, 1);
     }
   }
@@ -55,45 +49,43 @@ function keyPressed() {
   if (keyCode === LEFT_ARROW) {
     player.v = -3;
   }
-  if(keyCode === 32){
+  if (keyCode === 32) {
     lasers.push(new Laser(player.x));
   }
 }
 
 function Ship() {
-  this.x = windowWidth/2;
+  this.x = windowWidth / 2;
   this.scl = 50;
   this.y = windowHeight - this.scl;
-  
+
   this.v = 0;
 
   this.show = function() {
-  
     image(spaceship, this.x, this.y, this.scl, this.scl);
-    
-    if(this.x < 0-(this.scl+10)){
+
+    if (this.x < 0 - (this.scl + 10)) {
       this.x = windowWidth;
     }
-    if(this.x > windowWidth){
-      this.x = 0-this.scl;
+    if (this.x > windowWidth) {
+      this.x = 0 - this.scl;
     }
-    this.x +=this.v;
+    this.x += this.v;
   };
 }
 
 function Laser(xpos) {
-  this.x = xpos+25;
+  this.x = xpos + 25;
   this.y = windowHeight - player.scl;
   this.v = -5;
-  this.update = function(){
+  this.update = function() {
     this.y += this.v;
-    
   };
-  this.show = function(){
+  this.show = function() {
     stroke(255);
     strokeWeight(4);
     point(this.x, this.y);
-  }
+  };
 }
 
 function Alien() {
@@ -104,10 +96,14 @@ function Alien() {
   this.Ashow = function() {
     image(alien, this.Ax, this.Ay, this.Ascl, this.Ascl);
   };
-  this.update = function(){
+  this.update = function() {
     hit = false;
-    for(var i = 0; i< lasers.length; i++){
-      if(lasers[i].x < this.Ax+ this.Ascl && lasers[i].x > this.Ax && lasers[i].y <= this.Ay+this.Ascl){
+    for (var i = 0; i < lasers.length; i++) {
+      if (
+        lasers[i].x < this.Ax + this.Ascl &&
+        lasers[i].x > this.Ax &&
+        lasers[i].y <= this.Ay + this.Ascl
+      ) {
         hit = true;
       }
     }
