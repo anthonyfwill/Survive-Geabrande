@@ -17,7 +17,7 @@ let spaceship,
 function preload() {}
 
 function setup() {
-  s =false;
+  
   createCanvas(windowWidth, windowHeight);
   lasers = [];
   spaceship = loadImage(
@@ -49,10 +49,10 @@ function draw() {
 }
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW && player.x <) {
+  if (keyCode === RIGHT_ARROW) {
     player.v = 3;
   }
-  if (keyCode === LEFT_ARROW && ) {
+  if (keyCode === LEFT_ARROW) {
     player.v = -3;
   }
   if(keyCode === 32){
@@ -68,18 +68,16 @@ function Ship() {
   this.v = 0;
 
   this.show = function() {
-    fill(255);
+  
     image(spaceship, this.x, this.y, this.scl, this.scl);
-    // rect(this.x, this.y, this.scl ,this.scl);
     
-    if(this.x === windowWidth-this.scl && this.x === 0){
-      
-      this.v *= -1;
+    if(this.x < 0-(this.scl+10)){
+      this.x = windowWidth;
     }
-    else{
-      
+    if(this.x > windowWidth){
+      this.x = 0-this.scl;
     }
-    this.x += this.v;
+    this.x +=this.v;
   };
 }
 
@@ -113,5 +111,5 @@ function Alien() {
         hit = true;
       }
     }
-  }
+  };
 }
