@@ -3,62 +3,69 @@
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
           mouseIsPressed, translate, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt */
 
-let spaceship, alien, player, bulletalien1, bulletalien2, bulletspaceship;
+let spaceship,
+  alien,
+  player,
+  enemy,
+  bulletalien1,
+  bulletalien2,
+  bulletspaceship;
 
 function preload() {}
 
 function setup() {
-  createCanvas(800, 800);
-   
+  createCanvas(windowWidth, windowHeight);
+
   spaceship = loadImage(
-    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fspaceship.gif?v=1595871307227"
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fspaceship2.gif?v=1595871992652"
   );
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
+  enemy = new Alien();
   player = new Ship();
 }
 
 function draw() {
   background(0);
+  enemy.Ashow();
   player.show();
 }
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    player.move(1);
-  } 
-  if (keyCode === LEFT_ARROW) {
-    player.move(-1);
+    player.v = 3;
   }
-  if (keyCode === UP_ARROW) {
-  } else if (keyCode === DOWN_ARROW) {
+  if (keyCode === LEFT_ARROW) {
+    player.v = -3;
   }
 }
 
 function Ship() {
-  this.x = 200;
-  this.y = 200;
+  this.x = windowWidth/2;
+  this.y = windowHeight - scl;
   this.scl = 100;
-  this.move = function(dir) {
-    this.x += 10 * dir;
-  };
+  this.v = 0;
+
   this.show = function() {
-    image(alien, this.x, this.y, this.scl, this.scl);
+    fill(255);
+    //image(spaceship, this.x, this.y, this.scl, this.scl);
+    rect(this.x, this.y, this.scl ,this.scl);
+    this.x += this.v;
   };
 }
 
-function Laser(){
-  
+function Laser(xpos) {
+  this.x = xpos;
+  this.y = windowHeight - player.scl;
 }
-
 
 function Alien() {
-  this.x = 200;
-  this.y = 200;
-  this.scl = 100;
-  
-  this.showIt = function() {
-    image(alien, this.x, this.y, this.scl, this.scl);
+  this.Ax = 200;
+  this.Ay = 200;
+  this.Ascl = 100;
+
+  this.Ashow = function() {
+    image(alien, this.Ax, this.Ay, this.Ascl, this.Ascl);
   };
 }
