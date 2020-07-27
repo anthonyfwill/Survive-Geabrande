@@ -1,8 +1,8 @@
 /*global createCanvas, colorMode, HSB, width, height, random, background, fill, 
-          color, random, rect, ellipse, stroke, image, loadImage, keyCode,
+          color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
-          mouseIsPressed, translate, rotate, createVector, windowWidth, windowHeight, noStroke, UP_ARROW sqrt */
-let spaceship, alien, player, bulletalien;
+          mouseIsPressed, translate, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt */
+let spaceship, alien, player, bulletalien1, bulletalien2, bulletspaceship;
 
 function preload(){
   spaceship = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fspaceship.gif?v=1595868040731");
@@ -19,18 +19,42 @@ function setup() {
 function draw() {
   player = new ship();
   player.create();
+  keyPressed();
 }
 
 function ship() {
   this.x = 200;
   this.y = 200;
-  this.scl = 50;
-  
+  this.scl = 100;
+  this.move = function (dir){
+    this.x += 5;
+    
+  }
   this.create = function() {
     
-    
-    image(alien, this.x, this.y, this.scl, this.scl);
+    rect(this.x,this.y,50,50);
+    //image(alien, this.x, this.y, this.scl, this.scl);
   };
+  
+  this.update = function(){
+    
+  }
 }
+
+function keyPressed(){
+  if(keyCode === RIGHT_ARROW){
+    player.move(1);
+  
+  }
+  else if(keyCode === LEFT_ARROW){
+    player.move(-1);
+  }
+  if (keyCode === UP_ARROW) {
+    
+  } else if (keyCode === DOWN_ARROW) {
+
+  }
+}
+
 
 
