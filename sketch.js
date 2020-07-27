@@ -11,12 +11,13 @@ let spaceship,
   bulletalien2,
   bulletspaceship,
     hit,
-    exist,
+   
     lasers;
 
 function preload() {}
 
 function setup() {
+  s =false;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
   spaceship = loadImage(
@@ -35,23 +36,23 @@ function draw() {
   enemy.Ashow();
   player.show();
   for(var i = lasers.length - 1; i > 0; i--){
-    if(lasers[i].exist === true){
+    
       lasers[i].show();
       lasers[i].update();
-    }
+    
     
     if(lasers[i].y <= 0){
-      lasers[i].exist = false;
-      lasers[i].splice(i, 1);
+      
+      lasers.splice(i, 1);
     }
   }
 }
 
 function keyPressed() {
-  if (keyCode === RIGHT_ARROW) {
+  if (keyCode === RIGHT_ARROW && player.x <) {
     player.v = 3;
   }
-  if (keyCode === LEFT_ARROW) {
+  if (keyCode === LEFT_ARROW && ) {
     player.v = -3;
   }
   if(keyCode === 32){
@@ -71,14 +72,18 @@ function Ship() {
     image(spaceship, this.x, this.y, this.scl, this.scl);
     // rect(this.x, this.y, this.scl ,this.scl);
     
-    if(this.x >= -100){
-      this.x += this.v;
+    if(this.x === windowWidth-this.scl && this.x === 0){
+      
+      this.v *= -1;
     }
+    else{
+      
+    }
+    this.x += this.v;
   };
 }
 
 function Laser(xpos) {
-  this.exist = true;
   this.x = xpos+25;
   this.y = windowHeight - player.scl;
   this.v = -5;
