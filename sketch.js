@@ -20,7 +20,9 @@ let spaceship,
   lasers,
     bg,
     p,
-  soundBullet;
+    puImage,
+  soundBullet,
+    dyingAlien;
 
 var enemies = [];
 function preload() {
@@ -37,7 +39,9 @@ function preload() {
   explosion = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
   );
+  puImage = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FpowerUp.png?v=1595956551785");
   bg = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173");
+  dyingAlien = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fdyingalien.png?v=1595956380920");
 }
 
 function setup() {
@@ -66,7 +70,7 @@ function draw() {
     enemies[j].show();
     if (enemies[j].health <= 0) {
       
-      enemies.splice(j, 1);
+    //  enemies.splice(j, 1);
     }
   }
   for (var i = lasers.length - 1; i >= 0; i--) {
