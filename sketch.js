@@ -42,24 +42,32 @@ function draw() {
   text(`timer: ${timer}`, 200, 200);
 
   player.show();
-  for (var j = 0; j < enemies.length; j++) {
+  for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
+    
   }
-  for (var i = lasers.length - 1; i > 0; i--) {
+  for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
     lasers[i].update();
 
-    if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y)) {
+    if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
   }
 }
 function contact(x, y){
-   for (var j = 0; j < enemies.length; j++){
-     if(x < enemies[i].x + enemies[i].scl && x > enemies[i].x && y < enemies[i].y)
   
+   for (var j = 0; j < enemies.length; j++){
+     if(x < enemies[j].x + enemies[j].scl && x > enemies[j].x && y < enemies[j].y + 0.7*enemies[j].scl){
+       return j;
+     }
+     
    }
-}
+  return -1;
+  
+  }
+  
+
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
     player.v = 3;
@@ -114,16 +122,7 @@ function Alien(x, y) {
   this.show = function() {
     image(alien, this.x, this.y, this.scl, this.scl);
   };
-  this.update = function() {
-    hit = false;
-    for (var i = 0; i < lasers.length; i++) {
-      if (
-        lasers[i].x < this.x + this.scl &&
-        lasers[i].x > this.x &&
-        lasers[i].y <= this.y + this.scl
-      ) {
-        hit = true;
-      }
-    }
+  this.hurt = function() {
+    this.health -= 50;
   };
 }
