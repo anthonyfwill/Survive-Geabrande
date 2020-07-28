@@ -55,9 +55,12 @@ function setup() {
   power = 50;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
-  p = new increasedPower();
+  p = [];
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
+  }
+  for (var y = 0; y < 1; y++) {
+    p[y] = new increasedPower();
   }
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
@@ -70,8 +73,11 @@ function draw() {
   image(bg, 0, 0, width, height);
   stroke(255);
   text(`timer: ${Math.floor(timer)}`, 200, 200);
-  p.show();
-  
+  for (var k = p.length - 1; k >= 0; k--) {
+    p[k].show();
+    
+    
+  }
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
@@ -86,7 +92,12 @@ function draw() {
       enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
-
+    if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
+      p[contact(lasers[i].x, lasers[i].y, p)].activate();   
+      
+    
+    }
+  
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
@@ -110,12 +121,12 @@ function keyPressed() {
 }
 
 //checks if laser has contacted any enemy
-function contact(x, y) {
-  for (var j = 0; j < enemies.length; j++) {
+function contact(x, y, arr = enemies) {
+  for (var j = 0; j < arr.length; j++) {
     if (
-      x < enemies[j].x + enemies[j].scl &&
-      x > enemies[j].x &&
-      y < enemies[j].y + 0.7 * enemies[j].scl
+      x < arr[j].x + arr[j].scl &&
+      x > arr[j].x &&
+      y < arr[j].y + 0.7 * arr[j].scl
     ) {
       return j;
     }
