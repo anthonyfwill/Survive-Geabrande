@@ -2,7 +2,7 @@
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship*/
+          loadSound, Alien, Ship, Laser loaded*/
 
 let spaceship,
   alien,
@@ -34,8 +34,6 @@ function preload() {
   explosion = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
   );
-  //soundFormats();
-  //soundBullet = loadSound();
 }
 
 function setup() {
@@ -48,13 +46,15 @@ function setup() {
     enemies[x] = new Alien(x * 90, 0);
   }
   player = new Ship();
+  //soundBullet = loadSound('rainbow.mp3', loaded);
+  //soundBullet.setVolume(0.5);
 }
 
 function draw() {
-  timer++;
+  timer += 0.015;
   background(0);
   stroke(255);
-  text(`timer: ${timer}`, 200, 200);
+  text(`timer: ${Math.floor(timer)}`, 200, 200);
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
@@ -87,9 +87,11 @@ function draw() {
 //pushes a new laser whenever space is pressed
 function keyPressed() {
   if (keyCode === 32) {
+    //soundBullet.play();
     lasers.push(new Laser(player.x));
   }
 }
+//checks if laser has contacted any enemy
 function contact(x, y) {
   for (var j = 0; j < enemies.length; j++) {
     if (
