@@ -1,7 +1,8 @@
 /*global createCanvas, colorMode, HSB, width, height, random, background, fill, 
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
-          mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown */
+          mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
+          loadSound, Alien, Ship*/
 
 let spaceship,
   alien,
@@ -14,9 +15,10 @@ let spaceship,
   score,
   playerHealth,
   timer,
-    explosion,
+  explosion,
   power,
-  lasers;
+  lasers,
+  soundBullet;
 
 var enemies = [];
 function preload() {
@@ -29,7 +31,11 @@ function preload() {
   bulletPlayer = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169"
   );
-  explosion = loadImage()
+  explosion = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
+  );
+  //soundFormats();
+  //soundBullet = loadSound();
 }
 
 function setup() {
@@ -45,7 +51,6 @@ function setup() {
 }
 
 function draw() {
-  
   timer++;
   background(0);
   stroke(255);
@@ -62,26 +67,26 @@ function draw() {
     lasers[i].update();
     if (contact(lasers[i].x, lasers[i].y) >= 0) {
       enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
+      enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
 
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
   }
-  if(keyIsDown(LEFT_ARROW)){
-       player.v = -5;
-     } else if(keyIsDown(RIGHT_ARROW)){
-       player.v = 5;
-     }
-  else{
+  //player movement
+  if (keyIsDown(LEFT_ARROW)) {
+    player.v = -5;
+  } else if (keyIsDown(RIGHT_ARROW)) {
+    player.v = 5;
+  } else {
     player.v = 0;
   }
 }
 
-
-//
-function keyPressed(){
-  if(keyCode === 32){
+//pushes a new laser whenever space is pressed
+function keyPressed() {
+  if (keyCode === 32) {
     lasers.push(new Laser(player.x));
   }
 }
@@ -98,48 +103,6 @@ function contact(x, y) {
   return -1;
 }
 
-//Function for placing image of ship and allowing it to move left and right
-function Ship() {
-  this.x = windowWidth / 2;
-  this.scl = 50;
-  this.y = windowHeight - this.scl;
 
-  this.v = 0;
 
-  this.show = function() {
-    image(spaceship, this.x, this.y, this.scl, this.scl);
-    //If ship goes off screen will come out on the other side
-    if (this.x < 0 - (this.scl + 10)) {
-      this.x = windowWidth;
-    }
-    if (this.x > windowWidth) {
-      this.x = 0 - this.scl;
-    }
-    this.x += this.v;
-  };
-}
 
-function Laser(xpos) {
-  this.x = xpos + 25;
-  this.y = windowHeight - player.scl;
-  this.v = -5;
-  this.update = function() {
-    this.y += this.v;
-  };
-  this.show = function() {
-    image(bulletPlayer, this.x, this.y, 20, 20);
-  };
-}
-
-function Alien(x, y) {
-  this.x = x;
-  this.y = y;
-  this.scl = 70;
-  this.health = 100;
-  this.show = function() {
-    image(alien, this.x, this.y, this.scl, this.scl);
-  };
-  this.hurt = function() {
-    this.health -= power;
-  };
-}
