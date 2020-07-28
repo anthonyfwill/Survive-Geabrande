@@ -20,6 +20,7 @@ let spaceship,
   lasers,
   bg,
   p,
+    health,
   puImage,
   soundBullet,
   dyingAlien;
@@ -53,6 +54,7 @@ function preload() {
 function setup() {
   timer = 0;
   power = 50;
+  health = 100;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
   p = [];
@@ -72,7 +74,10 @@ function draw() {
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
-  text(`timer: ${Math.floor(timer)}`, 200, 200);
+  
+  text(`timer: ${Math.floor(timer)}`, 10, 100);
+  text(`power: ${power}`, 10, 150);
+  text(`health: ${health}}`, 10, 150);
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
     
@@ -93,8 +98,8 @@ function draw() {
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
-      p[contact(lasers[i].x, lasers[i].y, p)].activate();   
-      
+      p[contact(lasers[i].x, lasers[i].y, p)].activate();  
+      p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
     
     }
   
