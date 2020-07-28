@@ -82,11 +82,11 @@ function contact(x, y) {
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    player.v += 3;
-
+    player.v += 5;
+    
   }
   if (keyCode === LEFT_ARROW) {
-    player.v += -3;
+    player.v += -5;
     
   }
   if (keyCode === 32) {
