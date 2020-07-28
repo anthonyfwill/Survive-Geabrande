@@ -1,8 +1,8 @@
 /*global createCanvas, colorMode, HSB, width, height, random, background, fill, 
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
-          collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
+          collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship, Laser loaded, delay*/
+          loadSound, Alien, Ship, Laser loaded, PowerUp, delay*/
 
 let spaceship,
   alien,
@@ -19,6 +19,7 @@ let spaceship,
   power,
   lasers,
     bg,
+    p,
   soundBullet;
 
 var enemies = [];
@@ -36,7 +37,7 @@ function preload() {
   explosion = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
   );
-  bg = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fspace.gif?v=1595955622796");
+  bg = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173");
 }
 
 function setup() {
@@ -44,7 +45,7 @@ function setup() {
   power = 50;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
-
+  p = new PowerUp();
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
   }
@@ -59,10 +60,12 @@ function draw() {
   image(bg, 0, 0, width, height);
   stroke(255);
   text(`timer: ${Math.floor(timer)}`, 200, 200);
+  p.show();
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
     if (enemies[j].health <= 0) {
+      
       enemies.splice(j, 1);
     }
   }
@@ -95,6 +98,7 @@ function keyPressed() {
     lasers.push(new Laser(player.x));
   }
 }
+
 //checks if laser has contacted any enemy
 function contact(x, y) {
   for (var j = 0; j < enemies.length; j++) {
