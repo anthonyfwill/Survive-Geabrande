@@ -1,7 +1,7 @@
 /*global createCanvas, colorMode, HSB, width, height, random, background, fill, 
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, 
-          mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt */
+          mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown */
 
 let spaceship,
   alien,
@@ -14,6 +14,7 @@ let spaceship,
   score,
   playerHealth,
   timer,
+    explosion,
   power,
   lasers;
 
@@ -28,6 +29,7 @@ function preload() {
   bulletPlayer = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169"
   );
+  explosion = loadImage()
 }
 
 function setup() {
@@ -75,6 +77,14 @@ function draw() {
     player.v = 0;
   }
 }
+
+
+//
+function keyPressed(){
+  if(keyCode === 32){
+    lasers.push(new Laser(player.x));
+  }
+}
 function contact(x, y) {
   for (var j = 0; j < enemies.length; j++) {
     if (
@@ -88,7 +98,7 @@ function contact(x, y) {
   return -1;
 }
 
-
+//Function for placing image of ship and allowing it to move left and right
 function Ship() {
   this.x = windowWidth / 2;
   this.scl = 50;
@@ -98,7 +108,7 @@ function Ship() {
 
   this.show = function() {
     image(spaceship, this.x, this.y, this.scl, this.scl);
-
+    //If ship goes off screen will come out on the other side
     if (this.x < 0 - (this.scl + 10)) {
       this.x = windowWidth;
     }
@@ -124,7 +134,7 @@ function Laser(xpos) {
 function Alien(x, y) {
   this.x = x;
   this.y = y;
-  this.scl = 100;
+  this.scl = 70;
   this.health = 100;
   this.show = function() {
     image(alien, this.x, this.y, this.scl, this.scl);
