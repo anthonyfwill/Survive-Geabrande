@@ -13,7 +13,9 @@ let spaceship,
   score,
   playerHealth,
   timer,
+  power,
   lasers;
+
 var enemies = [];
 function preload() {
   spaceship = loadImage(
@@ -26,11 +28,12 @@ function preload() {
 
 function setup() {
   timer = 0;
+  power = 50;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
 
-  for(var x = 0; x < 5; x++){
-    enemies[x] = new Alien(x*90, 0);
+  for (var x = 0; x < 5; x++) {
+    enemies[x] = new Alien(x * 90, 0);
   }
   player = new Ship();
 }
@@ -39,34 +42,38 @@ function draw() {
   timer++;
   background(0);
   stroke(255);
-  text(`timer: ${timer}`, 200, 200);
-
+  text(`timer: ${timer}`, 200, 200);  
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
-    
+    if (enemies[j].health <= 0) {
+      enemies.splice(j, 1);
+    }
   }
   for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
     lasers[i].update();
+    if (contact(lasers[i].x, lasers[i].y) >= 0) {
+      enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
+    }
 
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
   }
 }
-function contact(x, y){
-  
-   for (var j = 0; j < enemies.length; j++){
-     if(x < enemies[j].x + enemies[j].scl && x > enemies[j].x && y < enemies[j].y + 0.7*enemies[j].scl){
-       return j;
-     }
-     
-   }
-  return -1;
-  
+function contact(x, y) {
+  for (var j = 0; j < enemies.length; j++) {
+    if (
+      x < enemies[j].x + enemies[j].scl &&
+      x > enemies[j].x &&
+      y < enemies[j].y + 0.7 * enemies[j].scl
+    ) {
+      return j;
+    }
   }
-  
+  return -1;
+}
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
@@ -115,14 +122,14 @@ function Laser(xpos) {
 }
 
 function Alien(x, y) {
-  this.x = x
+  this.x = x;
   this.y = y;
   this.scl = 100;
-  //this.health = 100;
+  this.health = 100;
   this.show = function() {
     image(alien, this.x, this.y, this.scl, this.scl);
   };
   this.hurt = function() {
-    this.health -= 50;
+    this.health -= power;
   };
 }
