@@ -25,34 +25,41 @@ function preload() {
 }
 
 function setup() {
-  //timer = 0;
+  timer = 0;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
 
-  enemies.push(new Alien);
+  for(var x = 0; x < 5; x++){
+    enemies[x] = new Alien(x*90, 0);
+  }
   player = new Ship();
 }
 
 function draw() {
-  //timer++;
+  timer++;
   background(0);
   stroke(255);
-  //text(`timer: ${timer}`, 200, 200);
+  text(`timer: ${timer}`, 200, 200);
 
   player.show();
-  for (var j = enemies.length - 1; j >= 0; j--) {
-    enemies[i].show();
+  for (var j = 0; j < enemies.length; j++) {
+    enemies[j].show();
   }
   for (var i = lasers.length - 1; i > 0; i--) {
     lasers[i].show();
     lasers[i].update();
 
-    if (lasers[i].y <= 0) {
+    if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y)) {
       lasers.splice(i, 1);
     }
   }
 }
-
+function contact(x, y){
+   for (var j = 0; j < enemies.length; j++){
+     if(x < enemies[i].x + enemies[i].scl && x > enemies[i].x && y < enemies[i].y)
+  
+   }
+}
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
     player.v = 3;
@@ -99,9 +106,9 @@ function Laser(xpos) {
   };
 }
 
-function Alien() {
-  this.x = random(0, windowWidth);
-  this.y = 0;
+function Alien(x, y) {
+  this.x = x
+  this.y = y;
   this.scl = 100;
   //this.health = 100;
   this.show = function() {
