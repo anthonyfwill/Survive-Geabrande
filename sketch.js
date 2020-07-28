@@ -43,7 +43,7 @@ function setup() {
 }
 
 function draw() {
-  player.v*=0.98;
+  
   timer++;
   background(0);
   stroke(255);
@@ -82,18 +82,27 @@ function contact(x, y) {
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    player.v += 5;
+    player.v = 3;
     
   }
   if (keyCode === LEFT_ARROW) {
-    player.v += -5;
+    player.v = -3;
     
   }
   if (keyCode === 32) {
     lasers.push(new Laser(player.x));
   }
 }
-
+function keyReleased(){
+  if (keyCode === RIGHT_ARROW) {
+    player.v = 0;
+    
+  }
+  if (keyCode === LEFT_ARROW) {
+    player.v =  0;
+    
+  }
+}
 function Ship() {
   this.x = windowWidth / 2;
   this.scl = 50;
