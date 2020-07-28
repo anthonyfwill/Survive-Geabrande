@@ -1,9 +1,9 @@
 class PowerUp {
   constructor(){
     this.x = 0;
-    this.y = random(0, windowHeight - 50);
-    this.vx = random(1, 3);
-    this.vy = random(0, 3);
+    this.y = random(300, windowHeight);
+    this.vx = random(2, 3);
+    this.vy = random(0, 1);
     this.scl = 50;
   }
   show(){

@@ -2,7 +2,7 @@
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship, Laser loaded, PowerUp, delay*/
+          loadSound, Alien, Ship, Laser loaded, PowerUp, increasedPower, delay*/
 
 let spaceship,
   alien,
@@ -18,11 +18,11 @@ let spaceship,
   explosion,
   power,
   lasers,
-    bg,
-    p,
-    puImage,
+  bg,
+  p,
+  puImage,
   soundBullet,
-    dyingAlien;
+  dyingAlien;
 
 var enemies = [];
 function preload() {
@@ -39,9 +39,15 @@ function preload() {
   explosion = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
   );
-  puImage = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FpowerUp.png?v=1595956551785");
-  bg = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173");
-  dyingAlien = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fdyingalien.png?v=1595956380920");
+  puImage = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FpowerUp.png?v=1595956551785"
+  );
+  bg = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173"
+  );
+  dyingAlien = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fdyingalien.png?v=1595956380920"
+  );
 }
 
 function setup() {
@@ -49,7 +55,7 @@ function setup() {
   power = 50;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
-  p = new PowerUp();
+  p = new increasedPower();
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
   }
@@ -65,12 +71,12 @@ function draw() {
   stroke(255);
   text(`timer: ${Math.floor(timer)}`, 200, 200);
   p.show();
+  
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
     if (enemies[j].health <= 0) {
-      
-    //  enemies.splice(j, 1);
+      enemies.splice(j, 1);
     }
   }
   for (var i = lasers.length - 1; i >= 0; i--) {
@@ -116,7 +122,3 @@ function contact(x, y) {
   }
   return -1;
 }
-
-
-
-
