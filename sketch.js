@@ -7,7 +7,7 @@ let spaceship,
   alien,
   player,
   enemy,
-    bulletPlayer,
+  bulletPlayer,
   bulletalien1,
   bulletalien2,
   hit,
@@ -25,7 +25,9 @@ function preload() {
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
-  bulletPlayer = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169");
+  bulletPlayer = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169"
+  );
 }
 
 function setup() {
@@ -41,10 +43,11 @@ function setup() {
 }
 
 function draw() {
+  player.v*=0.98;
   timer++;
   background(0);
   stroke(255);
-  text(`timer: ${timer}`, 200, 200);  
+  text(`timer: ${timer}`, 200, 200);
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[j].show();
@@ -79,10 +82,12 @@ function contact(x, y) {
 
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    player.v = 3;
+    player.v += 3;
+
   }
   if (keyCode === LEFT_ARROW) {
-    player.v = -3;
+    player.v += -3;
+    
   }
   if (keyCode === 32) {
     lasers.push(new Laser(player.x));
