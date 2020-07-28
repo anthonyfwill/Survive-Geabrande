@@ -10,8 +10,10 @@ let spaceship,
   bulletalien1,
   bulletalien2,
   hit,
-    enemies,
-    timer,
+  score,
+  playerHealth,
+  enemies,
+  timer,
   lasers;
 
 function preload() {
@@ -23,13 +25,13 @@ function preload() {
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
 }
-  
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   lasers = [];
   enemies = [];
-  
-  
+
+  enemies.push(new Alien());
   player = new Ship();
 }
 
@@ -38,13 +40,10 @@ function draw() {
   background(0);
   stroke(255);
   text(`timer: ${timer}`, 200, 200);
+
   player.show();
-  for(var j = enemies.length - 1; j >= 0; j--){
+  for (var j = enemies.length - 1; j >= 0; j--) {
     enemies[i].Ashow();
-    if(timer >= 100 && timer <= 200){
-      enemies.push();
-    }
-    
   }
   for (var i = lasers.length - 1; i > 0; i--) {
     lasers[i].show();
