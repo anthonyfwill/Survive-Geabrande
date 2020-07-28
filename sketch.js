@@ -12,38 +12,36 @@ let spaceship,
   hit,
   score,
   playerHealth,
-  enemies,
   timer,
   lasers;
-
+var enemies = [];
 function preload() {
   spaceship = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F8-bit-spaceship-png-1.png?v=1595872548652"
   );
-  timer = 0;
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
 }
 
 function setup() {
+  //timer = 0;
   createCanvas(windowWidth, windowHeight);
   lasers = [];
-  enemies = [];
 
-  enemies.push(new Alien());
+  enemies.push(new Alien);
   player = new Ship();
 }
 
 function draw() {
-  timer++;
+  //timer++;
   background(0);
   stroke(255);
-  text(`timer: ${timer}`, 200, 200);
+  //text(`timer: ${timer}`, 200, 200);
 
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
-    enemies[i].Ashow();
+    enemies[i].show();
   }
   for (var i = lasers.length - 1; i > 0; i--) {
     lasers[i].show();
@@ -102,20 +100,20 @@ function Laser(xpos) {
 }
 
 function Alien() {
-  this.Ax = random(0, windowWidth);
-  this.Ay = 0;
-  this.Ascl = 100;
-  this.health = 100;
-  this.Ashow = function() {
-    image(alien, this.Ax, this.Ay, this.Ascl, this.Ascl);
+  this.x = random(0, windowWidth);
+  this.y = 0;
+  this.scl = 100;
+  //this.health = 100;
+  this.show = function() {
+    image(alien, this.x, this.y, this.scl, this.scl);
   };
   this.update = function() {
     hit = false;
     for (var i = 0; i < lasers.length; i++) {
       if (
-        lasers[i].x < this.Ax + this.Ascl &&
-        lasers[i].x > this.Ax &&
-        lasers[i].y <= this.Ay + this.Ascl
+        lasers[i].x < this.x + this.scl &&
+        lasers[i].x > this.x &&
+        lasers[i].y <= this.y + this.scl
       ) {
         hit = true;
       }
