@@ -146,5 +146,7 @@ function contact(x, y, arr = enemies) {
 
 function removeIt(){
   enemies.splice(test, 1);
+  test=100;
+
 }
 
