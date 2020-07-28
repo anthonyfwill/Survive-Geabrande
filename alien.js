@@ -10,7 +10,6 @@ function Alien(x, y) {
     this.health -= power;
   };
   this.explode = function() {
-    
    image(explosion, this.x + 20, this.y + 20, 50, 50);
     
     
