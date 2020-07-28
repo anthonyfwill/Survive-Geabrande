@@ -7,6 +7,7 @@ let spaceship,
   alien,
   player,
   enemy,
+    bulletPlayer,
   bulletalien1,
   bulletalien2,
   hit,
@@ -24,6 +25,7 @@ function preload() {
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
+  bulletPlayer = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169");
 }
 
 function setup() {
@@ -115,9 +117,7 @@ function Laser(xpos) {
     this.y += this.v;
   };
   this.show = function() {
-    stroke(255);
-    strokeWeight(4);
-    point(this.x, this.y);
+    image(bulletPlayer, this.x, this.y, 20, 20);
   };
 }
 
