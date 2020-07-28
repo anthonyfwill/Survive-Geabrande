@@ -1,0 +1,3 @@
+class moreBullets extends PowerUp {
+  
+}

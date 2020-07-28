@@ -47,7 +47,7 @@ function preload() {
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173"
   );
   dyingAlien = loadImage(
-    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fdyingalien.png?v=1595956380920"
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-57ed89c1c56b.gif?v=1595959293618"
   );
 }
 
@@ -67,6 +67,7 @@ function setup() {
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
   //soundBullet.setVolume(0.5);
+
 }
 
 function draw() {
@@ -77,18 +78,22 @@ function draw() {
   
   text(`timer: ${Math.floor(timer)}`, 10, 100);
   text(`power: ${power}`, 10, 150);
-  text(`health: ${health}}`, 10, 150);
+  text(`health: ${health}`, 10, 125);
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
     
     
   }
   player.show();
-  for (var j = enemies.length - 1; j >= 0; j--) {
-    enemies[j].show();
+ for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
-      enemies.splice(j, 1);
-    }
+      enemies[j].dead();
+      test = j;
+      setTimeout(removeIt,1000);
+      
+    }else{
+       enemies[j].show();
+   }
   }
   for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
@@ -138,3 +143,8 @@ function contact(x, y, arr = enemies) {
   }
   return -1;
 }
+
+function removeIt(){
+  enemies.splice(test, 1);
+}
+

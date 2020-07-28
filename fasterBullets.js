@@ -1,0 +1,3 @@
+class fasterBullets extends PowerUps {
+  
+}
