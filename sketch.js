@@ -29,18 +29,22 @@ function setup() {
   lasers = [];
   enemies = [];
   
-  enemies.push()
+  
   player = new Ship();
 }
 
 function draw() {
   timer++;
   background(0);
-  
+  stroke(255);
+  text(`timer: ${timer}`, 200, 200);
   player.show();
-  for(var j = enemies.length - 1; j > 0; j--){
-    if()
-    enemies.Ashow();
+  for(var j = enemies.length - 1; j >= 0; j--){
+    enemies[i].Ashow();
+    if(timer >= 100 && timer <= 200){
+      enemies.push();
+    }
+    
   }
   for (var i = lasers.length - 1; i > 0; i--) {
     lasers[i].show();
@@ -99,7 +103,7 @@ function Laser(xpos) {
 }
 
 function Alien() {
-  this.Ax = 200;
+  this.Ax = random(0, windowWidth);
   this.Ay = 0;
   this.Ascl = 100;
   this.health = 100;
