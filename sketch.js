@@ -10,28 +10,38 @@ let spaceship,
   bulletalien1,
   bulletalien2,
   hit,
+    enemies,
+    timer,
   lasers;
 
-function preload() {}
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  lasers = [];
+function preload() {
   spaceship = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F8-bit-spaceship-png-1.png?v=1595872548652"
   );
-
+  timer = 0;
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
-  enemy = new Alien();
+}
+  
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  lasers = [];
+  enemies = [];
+  
+  enemies.push()
   player = new Ship();
 }
 
 function draw() {
+  timer++;
   background(0);
-  enemy.Ashow();
+  
   player.show();
+  for(var j = enemies.length - 1; j > 0; j--){
+    if()
+    enemies.Ashow();
+  }
   for (var i = lasers.length - 1; i > 0; i--) {
     lasers[i].show();
     lasers[i].update();
