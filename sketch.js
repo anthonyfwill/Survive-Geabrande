@@ -66,6 +66,14 @@ function draw() {
       lasers.splice(i, 1);
     }
   }
+  if(keyIsDown(LEFT_ARROW)){
+       player.v = -5;
+     } else if(keyIsDown(RIGHT_ARROW)){
+       player.v = 5;
+     }
+  else{
+    player.v = 0;
+  }
 }
 function contact(x, y) {
   for (var j = 0; j < enemies.length; j++) {
@@ -80,29 +88,7 @@ function contact(x, y) {
   return -1;
 }
 
-function keyPressed() {
-  if (keyCode === RIGHT_ARROW) {
-    player.v = 3;
-    
-  }
-  if (keyCode === LEFT_ARROW) {
-    player.v = -3;
-    
-  }
-  if (keyCode === 32) {
-    lasers.push(new Laser(player.x));
-  }
-}
-function keyReleased(){
-  if (keyCode === RIGHT_ARROW) {
-    player.v = 0;
-    
-  }
-  if (keyCode === LEFT_ARROW) {
-    player.v =  0;
-    
-  }
-}
+
 function Ship() {
   this.x = windowWidth / 2;
   this.scl = 50;
