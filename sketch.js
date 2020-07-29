@@ -2,7 +2,7 @@
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, delay*/
+          loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, enemyLaser, delay*/
 
 let spaceship,
   alien,
@@ -18,17 +18,18 @@ let spaceship,
   explosion,
   power,
   lasers,
+  elasers,
   bg,
   p,
   health,
   puImage,
   soundBullet,
-    aSpd,
-    moreLasers,
-    spawn,
+  aSpd,
+  moreLasers,
+  spawn,
+  enemies,
   dyingAlien;
 
-var enemies = [];
 function preload() {
   spaceship = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F8-bit-spaceship-png-1.png?v=1595872548652"
@@ -63,16 +64,17 @@ function setup() {
   power = 50;
   health = 100;
   createCanvas(windowWidth, windowHeight);
+  enemies = [];
   lasers = [];
+  elasers = [];
   p = [];
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
   }
- 
+
   p[0] = new increasedPower();
   p[1] = new fasterBullets();
-  
-  
+
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
   //soundBullet.setVolume(0.5);
@@ -83,42 +85,58 @@ function draw() {
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
-  
+
   text(`timer: ${Math.floor(timer)}`, 10, 100);
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
-   text(`score: ${score}`, 10, 75);
+  text(`score: ${score}`, 10, 75);
   text(`bullet speed: ${aSpd + 5}`, 10, 175);
-  if(score % 2 == 1 && spawn == true){
-    if(timer )
-    enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+  
+  //Displays Score for killing aliens
+  if (score % 2 == 1 && spawn == true) {
+    if (timer <= 10) {
+      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+    } else {
+      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+
+    }
     spawn = false;
-  }
-  else if(score % 2 == 0){
+  } else if (score % 2 == 0) {
     spawn = true;
   }
+  
+  //Displays the bullets
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
   }
+  
+  //Displays Player (Spaceship)
   player.show();
+  
+  //Displays Alien lasers
   for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
- 
       enemies[j].dead();
       test = j;
       setTimeout(removeIt, 1000);
-      
     } else {
       enemies[j].show();
+      
+      if(Math.floor(timer) == 4){
+        //elasers.push(new EnemyLaser(enemies[j]));
+        //elasers[j].show();
+      }
     }
   }
+  
+  //Lasers for the spaceship
   for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
     lasers[i].update();
     if (contact(lasers[i].x, lasers[i].y) >= 0) {
       enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
-  
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
       p[contact(lasers[i].x, lasers[i].y, p)].activate();
@@ -129,6 +147,7 @@ function draw() {
       lasers.splice(i, 1);
     }
   }
+  
   //player movement
   if (keyIsDown(LEFT_ARROW)) {
     player.v = -5;
@@ -162,8 +181,7 @@ function contact(x, y, arr = enemies) {
 }
 
 function removeIt() {
-  
   enemies.splice(test, 1);
-  
+
   test = 100;
 }

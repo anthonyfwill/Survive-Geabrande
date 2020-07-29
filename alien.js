@@ -12,12 +12,23 @@ function Alien(x, y) {
       score++; 
     }
   };
+  
+  //function for explosion when bullet hits enemy
   this.explode = function() {
    image(explosion, this.x + 20, this.y + 20, 50, 50);
- this.dead = function(){
-   image(dyingAlien, this.x, this.y, this.scl, this.scl);
-   
-   }   
-    
   }
+  
+  //Function for when the alien dies displays animation
+  this.dead = function(){
+   image(dyingAlien, this.x, this.y, this.scl, this.scl);
+   }   
+  
+  //Function to have the alien move randomly left or right
+  this.movement = function(){
+    if(Math.floor(Math.random() * 2 + 1) === 2){
+      this.x += Math.floor(Math.random() * windowWidth + 1)
+    }else {
+      this.x += (Math.floor(Math.random() * windowWidth + 1)) *-1;
+    }    
+  };
 }
