@@ -29,9 +29,11 @@ let spaceship,
   moreLasers,
   spawn,
   enemies,
+  gameOver,
   dyingAlien,
   alienBullet,
-  startFight;
+  startFight,
+  alienShooting;
 
 function preload() {
   spaceship = loadImage(
@@ -59,9 +61,13 @@ function preload() {
   alienBullet = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Falienbullet1.png?v=1595954121414"
   );
+  alienShooting = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fwilliam-robinson-gun-alien-firing-animation.gif?v=1596044928572"
+  );
 }
 
 function setup() {
+  gameOver = false;
   spawn = true;
   moreLasers = false;
   startFight = false;
@@ -82,7 +88,7 @@ function setup() {
 
   p[0] = new increasedPower();
   p[1] = new fasterBullets();
-
+  p[2] = new moreBullets();
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
   //soundBullet.setVolume(0.5);
@@ -93,6 +99,7 @@ function draw() {
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
+  gameOver = health <= 0 ? true : false;
 
   text(`timer: ${Math.floor(timer)}`, 10, 100);
   text(`power: ${power}`, 10, 150);
@@ -104,7 +111,11 @@ function draw() {
   if (score % 2 == 1 && spawn == true) {
     if (timer <= 10) {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
+      if (timer > 3) {
+        elasers[enemies.length - 1] = new EnemyLaser(
+          enemies[enemies.length - 1]
+        );
+      }
     } else {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
       elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
@@ -135,10 +146,15 @@ function draw() {
     } else {
       enemies[j].show();
       enemies[j].movement();
-      elasers[j].show();
-      elasers[j].update();
-      if(elasers[j].x > player.x && elasers[j].x < player.x + player.scl && elasers[j].y > player.y){ 
-        hit = true;
+      if (timer > 3) {
+        elasers[j].show();
+        elasers[j].update();
+      }
+      if (
+        elasers[j].x > player.x &&
+        elasers[j].x < player.x + player.scl &&
+        elasers[j].y > player.y
+      ) {
         health -= 10;
       }
     }

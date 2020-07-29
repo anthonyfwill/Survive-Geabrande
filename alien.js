@@ -3,10 +3,15 @@ function Alien(x, y) {
   this.y = y;
   this.scl = 70;
   this.health = 100;
-  this.keepspawn = true;
+  this.keepspawn = false;
 
   this.show = function() {
-    image(alien, this.x, this.y, this.scl, this.scl);
+    if(this.keepspawn === false){
+      image(alien, this.x, this.y, this.scl, this.scl);
+    }else {
+      image(alienShooting, this.x, this.y, this.scl, this.scl);
+      
+    }
   };
   this.hurt = function() {
     this.health -= power;
