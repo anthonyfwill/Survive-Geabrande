@@ -106,16 +106,12 @@ function draw() {
   text(`health: ${health}`, 10, 125);
   text(`score: ${score}`, 10, 75);
   text(`bullet speed: ${aSpd + 5}`, 10, 175);
-
+  text(`gameover: ${gameOver}`, 10, 200);
   //Spawns more Aliens when you kill them
   if (score % 2 == 1 && spawn == true) {
     if (timer <= 10) {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      if (timer > 3) {
-        elasers[enemies.length - 1] = new EnemyLaser(
-          enemies[enemies.length - 1]
-        );
-      }
+      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
     } else {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
       elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
@@ -140,7 +136,6 @@ function draw() {
   for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
       enemies[j].dead();
-      //elasers.splice(j, 1);
       test = j;
       setTimeout(removeIt, 1000);
     } else {
@@ -192,7 +187,7 @@ function keyPressed() {
     //soundBullet.play();
     lasers.push(new Laser(player.x));
     startFight = true;
-    if(moreLasers){
+    if (moreLasers) {
       lasers.push(new Laser(player.x, 2));
       lasers.push(new Laser(player.x, 0, -2));
     }
