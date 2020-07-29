@@ -33,6 +33,7 @@ let spaceship,
   dyingAlien,
   alienBullet,
   startFight,
+    restartButton,
   alienShooting;
 
 function preload() {
@@ -108,77 +109,90 @@ function draw() {
   text(`bullet speed: ${aSpd + 5}`, 10, 175);
   text(`gameover: ${gameOver}`, 10, 200);
   //Spawns more Aliens when you kill them
-  if (score % 2 == 1 && spawn == true) {
-    if (timer <= 10) {
-      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
-    } else {
-      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
+  if (!gameOver) {
+    if (score % 2 == 1 && spawn == true) {
+      if (timer <= 10) {
+        enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+        elasers[enemies.length - 1] = new EnemyLaser(
+          enemies[enemies.length - 1]
+        );
+      } else {
+        enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+        elasers[enemies.length - 1] = new EnemyLaser(
+          enemies[enemies.length - 1]
+        );
 
-      enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
-    }
-    spawn = false;
-  } else if (score % 2 == 0) {
-    spawn = true;
-  }
-
-  //Displays the powerups
-  for (var k = p.length - 1; k >= 0; k--) {
-    p[k].show();
-  }
-
-  //Displays Player (Spaceship)
-  player.show();
-
-  //Displays Alien lasers
-  for (var j = enemies.length - 1; j >= 0; j--) {
-    if (enemies[j].health <= 0) {
-      enemies[j].dead();
-      test = j;
-      setTimeout(removeIt, 1000);
-    } else {
-      enemies[j].show();
-      enemies[j].movement();
-      if (timer > 3) {
-        elasers[j].show();
-        elasers[j].update();
+        enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+        elasers[enemies.length - 1] = new EnemyLaser(
+          enemies[enemies.length - 1]
+        );
       }
-      if (
-        elasers[j].x > player.x &&
-        elasers[j].x < player.x + player.scl &&
-        elasers[j].y > player.y
-      ) {
-        health -= 10;
-      }
-    }
-  }
-  //Lasers for the spaceship
-  for (var i = lasers.length - 1; i >= 0; i--) {
-    lasers[i].show();
-    lasers[i].update();
-    if (contact(lasers[i].x, lasers[i].y) >= 0) {
-      enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
-      enemies[contact(lasers[i].x, lasers[i].y)].explode();
-    }
-    if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
-      p[contact(lasers[i].x, lasers[i].y, p)].activate();
-      p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
+      spawn = false;
+    } else if (score % 2 == 0) {
+      spawn = true;
     }
 
-    if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
-      lasers.splice(i, 1);
+    //Displays the powerups
+    for (var k = p.length - 1; k >= 0; k--) {
+      p[k].show();
+    }
+
+    //Displays Player (Spaceship)
+    player.show();
+
+    //Displays Alien lasers
+    for (var j = enemies.length - 1; j >= 0; j--) {
+      if (enemies[j].health <= 0) {
+        enemies[j].dead();
+        test = j;
+        setTimeout(removeIt, 1000);
+      } else {
+        enemies[j].show();
+        enemies[j].movement();
+        if (timer > 3) {
+          elasers[j].show();
+          elasers[j].update();
+        }
+        if (
+          elasers[j].x > player.x &&
+          elasers[j].x < player.x + player.scl &&
+          elasers[j].y > player.y
+        ) {
+          health -= 10;
+        }
+      }
+    }
+    //Lasers for the spaceship
+    for (var i = lasers.length - 1; i >= 0; i--) {
+      lasers[i].show();
+      lasers[i].update();
+      if (contact(lasers[i].x, lasers[i].y) >= 0) {
+        enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
+        enemies[contact(lasers[i].x, lasers[i].y)].explode();
+      }
+      if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
+        p[contact(lasers[i].x, lasers[i].y, p)].activate();
+        p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
+      }
+
+      if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
+        lasers.splice(i, 1);
+      }
+    }
+    //player movement
+    if (keyIsDown(LEFT_ARROW)) {
+      player.v = -5;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+      player.v = 5;
+    } else {
+      player.v = 0;
     }
   }
-  //player movement
-  if (keyIsDown(LEFT_ARROW)) {
-    player.v = -5;
-  } else if (keyIsDown(RIGHT_ARROW)) {
-    player.v = 5;
-  } else {
-    player.v = 0;
-  }
+  else{
+    
+      
+    }
+  
 }
 
 //pushes a new laser whenever space is pressed
