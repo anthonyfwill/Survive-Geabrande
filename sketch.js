@@ -25,6 +25,7 @@ let spaceship,
   soundBullet,
     aSpd,
     moreLasers,
+    spawn,
   dyingAlien;
 
 var enemies = [];
@@ -54,6 +55,7 @@ function preload() {
 }
 
 function setup() {
+  spawn = true;
   moreLasers = false;
   aSpd = 0;
   score = 0;
@@ -81,12 +83,20 @@ function draw() {
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
-
+  
   text(`timer: ${Math.floor(timer)}`, 10, 100);
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
    text(`score: ${score}`, 10, 75);
-  text(`score: ${score}`, 10, 75);
+  text(`bullet speed: ${aSpd + 5}`, 10, 175);
+  if(score % 2 == 1 && spawn == true){
+    if(timer )
+    enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+    spawn = false;
+  }
+  else if(score % 2 == 0){
+    spawn = true;
+  }
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
   }
@@ -97,6 +107,7 @@ function draw() {
       enemies[j].dead();
       test = j;
       setTimeout(removeIt, 1000);
+      
     } else {
       enemies[j].show();
     }
