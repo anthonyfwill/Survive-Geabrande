@@ -8,12 +8,16 @@ function Alien(x, y) {
   };
   this.hurt = function() {
     this.health -= power;
+    if(this.health <= 0){
+      score++; 
+    }
   };
   this.explode = function() {
    image(explosion, this.x + 20, this.y + 20, 50, 50);
  this.dead = function(){
    image(dyingAlien, this.x, this.y, this.scl, this.scl);
- }   
+   
+   }   
     
   }
 }

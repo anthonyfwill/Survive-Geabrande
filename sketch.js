@@ -99,6 +99,7 @@ function draw() {
     if (contact(lasers[i].x, lasers[i].y) >= 0) {
       enemies[contact(lasers[i].x, lasers[i].y)].hurt(power);
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
+  
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
       p[contact(lasers[i].x, lasers[i].y, p)].activate();
@@ -142,6 +143,8 @@ function contact(x, y, arr = enemies) {
 }
 
 function removeIt() {
+  
   enemies.splice(test, 1);
+  
   test = 100;
 }
