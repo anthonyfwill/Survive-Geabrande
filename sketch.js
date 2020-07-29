@@ -96,7 +96,7 @@ function setup() {
 }
 
 function draw() {
-  timer += 0.015;
+  
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
@@ -110,6 +110,7 @@ function draw() {
   text(`gameover: ${gameOver}`, 10, 200);
   //Spawns more Aliens when you kill them
   if (!gameOver) {
+    timer += 0.015;
     if (score % 2 == 1 && spawn == true) {
       if (timer <= 10) {
         enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
