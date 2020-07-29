@@ -1,7 +1,7 @@
 function Laser(xpos) {
   this.x = xpos + 25;
   this.y = windowHeight - player.scl;
-  this.v = -5;
+  this.v = -5 - aSpd;
   this.update = function() {
     this.y += this.v;
   };

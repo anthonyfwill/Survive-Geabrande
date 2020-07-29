@@ -2,7 +2,7 @@
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship, Laser loaded, PowerUp, increasedPower, delay*/
+          loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, delay*/
 
 let spaceship,
   alien,
@@ -23,6 +23,8 @@ let spaceship,
   health,
   puImage,
   soundBullet,
+    aSpd,
+    moreLasers,
   dyingAlien;
 
 var enemies = [];
@@ -52,6 +54,8 @@ function preload() {
 }
 
 function setup() {
+  moreLasers = false;
+  aSpd = 0;
   score = 0;
   timer = 0;
   power = 50;
@@ -62,9 +66,11 @@ function setup() {
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
   }
-  for (var y = 0; y < 1; y++) {
-    p[y] = new increasedPower();
-  }
+ 
+  p[0] = new increasedPower();
+  p[1] = new fasterBullets();
+  
+  
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
   //soundBullet.setVolume(0.5);
@@ -80,12 +86,14 @@ function draw() {
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
    text(`score: ${score}`, 10, 75);
+  text(`score: ${score}`, 10, 75);
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
   }
   player.show();
   for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
+ 
       enemies[j].dead();
       test = j;
       setTimeout(removeIt, 1000);

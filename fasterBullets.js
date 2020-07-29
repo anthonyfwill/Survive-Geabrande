@@ -1,3 +1,5 @@
-class fasterBullets extends PowerUps {
-  
+class fasterBullets extends PowerUp {
+  activate(){
+    aSpd += 5;
+  }
 }
