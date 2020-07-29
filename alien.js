@@ -3,6 +3,8 @@ function Alien(x, y) {
   this.y = y;
   this.scl = 70;
   this.health = 100;
+  this.keepspawn = true;
+
   this.show = function() {
     image(alien, this.x, this.y, this.scl, this.scl);
   };

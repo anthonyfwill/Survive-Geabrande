@@ -29,7 +29,6 @@ let spaceship,
   moreLasers,
   spawn,
   enemies,
-    shoot,
   dyingAlien,
   alienBullet,
   startFight;
@@ -57,11 +56,12 @@ function preload() {
   dyingAlien = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-57ed89c1c56b.gif?v=1595959293618"
   );
-  alienBullet = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Falienbullet1.png?v=1595954121414");
+  alienBullet = loadImage(
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Falienbullet1.png?v=1595954121414"
+  );
 }
 
 function setup() {
-  shoot = true;
   spawn = true;
   moreLasers = false;
   startFight = false;
@@ -99,39 +99,37 @@ function draw() {
   text(`health: ${health}`, 10, 125);
   text(`score: ${score}`, 10, 75);
   text(`bullet speed: ${aSpd + 5}`, 10, 175);
-  
+
   //Spawns more Aliens when you kill them
   if (score % 2 == 1 && spawn == true) {
     if (timer <= 10) {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
-
+      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
     } else {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
+      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
 
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
-
-
+      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
     }
     spawn = false;
   } else if (score % 2 == 0) {
     spawn = true;
   }
-  
+
   //Displays the powerups
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
   }
-  
+
   //Displays Player (Spaceship)
   player.show();
-  
+
   //Displays Alien lasers
   for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
       enemies[j].dead();
+      elasers[j].splice();
       test = j;
       setTimeout(removeIt, 1000);
     } else {
@@ -139,13 +137,8 @@ function draw() {
       enemies[j].movement();
       elasers[j].show();
       elasers[j].update();
-      if(Math.floor(timer) % 4 == 0){
-        
-        shoot = false;
-      }
     }
   }
-  
   //Lasers for the spaceship
   for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
@@ -155,15 +148,14 @@ function draw() {
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
-      p[contact(lasers[i].x, lasers[i].y, p)].activate();
-      p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
+    p[contact(lasers[i].x, lasers[i].y, p)].activate();
+    p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
     }
 
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
   }
-  
   //player movement
   if (keyIsDown(LEFT_ARROW)) {
     player.v = -5;
@@ -173,6 +165,10 @@ function draw() {
     player.v = 0;
   }
 }
+
+
+
+
 
 //pushes a new laser whenever space is pressed
 function keyPressed() {
