@@ -40,7 +40,7 @@ function preload() {
   alien = loadImage(
     "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
   );
-  alien.delay(200);
+  alien.delay(100);
   bulletPlayer = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fbullet1done.png?v=1595871297169"
   );
@@ -137,6 +137,10 @@ function draw() {
       enemies[j].movement();
       elasers[j].show();
       elasers[j].update();
+      if(elasers[j].x > player.x && elasers[j].x < player.x + player.scl && elasers[j].y > player.y){ 
+        hit = true;
+        health -= 10;
+      }
     }
   }
   //Lasers for the spaceship
