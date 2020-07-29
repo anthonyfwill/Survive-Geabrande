@@ -2,7 +2,8 @@
           color, random,  LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, rect, ellipse, stroke, image, loadImage, keyCode,
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
-          loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, enemyLaser, delay*/
+          loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, enemyLaser, delay
+          EnemyLaser*/
 
 let spaceship,
   alien,
@@ -28,8 +29,10 @@ let spaceship,
   moreLasers,
   spawn,
   enemies,
+    shoot,
   dyingAlien,
-  alienBullet;
+  alienBullet,
+  startFight;
 
 function preload() {
   spaceship = loadImage(
@@ -58,8 +61,10 @@ function preload() {
 }
 
 function setup() {
+  shoot = true;
   spawn = true;
   moreLasers = false;
+  startFight = false;
   aSpd = 0;
   score = 0;
   timer = 0;
@@ -95,13 +100,19 @@ function draw() {
   text(`score: ${score}`, 10, 75);
   text(`bullet speed: ${aSpd + 5}`, 10, 175);
   
-  //Displays Score for killing aliens
+  //Spawns more Aliens when you kill them
   if (score % 2 == 1 && spawn == true) {
     if (timer <= 10) {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
+
     } else {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
+
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
+      elasers[enemies.length-1] = new EnemyLaser(enemies.length-1);
+
 
     }
     spawn = false;
@@ -127,9 +138,10 @@ function draw() {
       enemies[j].show();
       enemies[j].movement();
       elasers[j].show();
-      if(Math.floor(timer) == 4){
-        //elasers.push(new EnemyLaser(enemies[j]));
-        //elasers[j].show();
+      elasers[j].update();
+      if(Math.floor(timer) % 4 == 0){
+        
+        shoot = false;
       }
     }
   }
@@ -167,6 +179,7 @@ function keyPressed() {
   if (keyCode === 32) {
     //soundBullet.play();
     lasers.push(new Laser(player.x));
+    startFight = true;
   }
 }
 
