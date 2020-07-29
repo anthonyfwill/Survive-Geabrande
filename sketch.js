@@ -192,6 +192,10 @@ function keyPressed() {
     //soundBullet.play();
     lasers.push(new Laser(player.x));
     startFight = true;
+    if(moreLasers){
+      lasers.push(new Laser(player.x, 2));
+      lasers.push(new Laser(player.x, 0, -2));
+    }
   }
 }
 
