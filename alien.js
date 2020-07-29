@@ -25,10 +25,10 @@ function Alien(x, y) {
   
   //Function to have the alien move randomly left or right
   this.movement = function(){
-    if(Math.floor(Math.random() * 2 + 1) === 2){
-      this.x += Math.floor(Math.random() * windowWidth + 1)
+    if(Math.floor(Math.random() * 10 + 1) <= 5){
+      this.x += Math.floor(Math.random() * 3 + 1)
     }else {
-      this.x += (Math.floor(Math.random() * windowWidth + 1)) *-1;
+      this.x += (Math.floor(Math.random() * 3 + 1)) *-1;
     }    
   };
 }

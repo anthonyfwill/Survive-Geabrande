@@ -6,6 +6,6 @@ function EnemyLaser(alien) {
     this.y += this.v;
   };
   this.show = function() {
-    image(bulletPlayer, this.x, this.y, 20, 20);
+    image(alienBullet, this.x, this.y, 20, 20);
   };
 }

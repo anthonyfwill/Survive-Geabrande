@@ -28,7 +28,8 @@ let spaceship,
   moreLasers,
   spawn,
   enemies,
-  dyingAlien;
+  dyingAlien,
+  alienBullet;
 
 function preload() {
   spaceship = loadImage(
@@ -53,6 +54,7 @@ function preload() {
   dyingAlien = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-57ed89c1c56b.gif?v=1595959293618"
   );
+  alienBullet = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Falienbullet1.png?v=1595954121414");
 }
 
 function setup() {
@@ -70,6 +72,7 @@ function setup() {
   p = [];
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(x * 90, 0);
+    elasers[x] = new EnemyLaser(enemies[x]);
   }
 
   p[0] = new increasedPower();
@@ -106,7 +109,7 @@ function draw() {
     spawn = true;
   }
   
-  //Displays the bullets
+  //Displays the powerups
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
   }
@@ -122,7 +125,8 @@ function draw() {
       setTimeout(removeIt, 1000);
     } else {
       enemies[j].show();
-      
+      enemies[j].movement();
+      elasers[j].show();
       if(Math.floor(timer) == 4){
         //elasers.push(new EnemyLaser(enemies[j]));
         //elasers[j].show();
