@@ -20,7 +20,7 @@ let spaceship,
   lasers,
   bg,
   p,
-    health,
+  health,
   puImage,
   soundBullet,
   dyingAlien;
@@ -52,6 +52,7 @@ function preload() {
 }
 
 function setup() {
+  score = 0;
   timer = 0;
   power = 50;
   health = 100;
@@ -67,7 +68,6 @@ function setup() {
   player = new Ship();
   //soundBullet = loadSound('scifi002.mp3', loaded);
   //soundBullet.setVolume(0.5);
-
 }
 
 function draw() {
@@ -75,25 +75,23 @@ function draw() {
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);
-  
+
   text(`timer: ${Math.floor(timer)}`, 10, 100);
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
+   text(`score: ${score}`, 10, 75);
   for (var k = p.length - 1; k >= 0; k--) {
     p[k].show();
-    
-    
   }
   player.show();
- for (var j = enemies.length - 1; j >= 0; j--) {
+  for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
       enemies[j].dead();
       test = j;
-      setTimeout(removeIt,1000);
-      
-    }else{
-       enemies[j].show();
-   }
+      setTimeout(removeIt, 1000);
+    } else {
+      enemies[j].show();
+    }
   }
   for (var i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
@@ -103,11 +101,10 @@ function draw() {
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
-      p[contact(lasers[i].x, lasers[i].y, p)].activate();  
+      p[contact(lasers[i].x, lasers[i].y, p)].activate();
       p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
-    
     }
-  
+
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
       lasers.splice(i, 1);
     }
@@ -144,9 +141,7 @@ function contact(x, y, arr = enemies) {
   return -1;
 }
 
-function removeIt(){
+function removeIt() {
   enemies.splice(test, 1);
-  test=100;
-
+  test = 100;
 }
-
