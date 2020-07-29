@@ -8,11 +8,11 @@ function EnemyLaser(alien) {
     this.y += this.v;
   };
   this.show = function() {
-    if(this.keepspawn === true){
+    //if(this.keepspawn === true){
       image(alienBullet, this.x, this.y, 20, 20);
       if(this.y >= windowHeight){
-        this.y = alien.y;
+        this.y = alien.y + alien.scl;
       }
-    }
+  // }
   };
 }

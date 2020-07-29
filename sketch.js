@@ -104,13 +104,13 @@ function draw() {
   if (score % 2 == 1 && spawn == true) {
     if (timer <= 10) {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
+      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
     } else {
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
+      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
 
       enemies.push(new Alien(random(0, windowWidth - 50), random(0, 200)));
-      elasers[enemies.length - 1] = new EnemyLaser(enemies.length - 1);
+      elasers[enemies.length - 1] = new EnemyLaser(enemies[enemies.length - 1]);
     }
     spawn = false;
   } else if (score % 2 == 0) {
@@ -129,7 +129,7 @@ function draw() {
   for (var j = enemies.length - 1; j >= 0; j--) {
     if (enemies[j].health <= 0) {
       enemies[j].dead();
-      elasers[j].splice();
+      //elasers.splice(j, 1);
       test = j;
       setTimeout(removeIt, 1000);
     } else {
@@ -148,8 +148,8 @@ function draw() {
       enemies[contact(lasers[i].x, lasers[i].y)].explode();
     }
     if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
-    p[contact(lasers[i].x, lasers[i].y, p)].activate();
-    p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
+      p[contact(lasers[i].x, lasers[i].y, p)].activate();
+      p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
     }
 
     if (lasers[i].y <= 0 || contact(lasers[i].x, lasers[i].y) >= 0) {
@@ -165,10 +165,6 @@ function draw() {
     player.v = 0;
   }
 }
-
-
-
-
 
 //pushes a new laser whenever space is pressed
 function keyPressed() {
