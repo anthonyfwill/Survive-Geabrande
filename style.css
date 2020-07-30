@@ -1,7 +1,57 @@
-html, body {
-  margin: 0;
-  padding: 0;
+body{
+  background-image: url("https://media.giphy.com/media/NEVT1WQFlHec8/giphy.gif");
+  background-color: #cccccc;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-canvas {
-  display: block;
+
+h1{
+left: 0;
+line-height: 200px;
+margain-top: -100px;
+position: absolute;
+text-align: center;
+top:40%;
+width:100%;
+font-size:100px;
+font-family: 'Press Start 2P', cursive;
+}
+
+.listone{
+  left: 0;
+line-height: 200px;
+margain-top: -100px;
+position: absolute;
+text-align: center;
+top:40%;
+width:100%;
+font-size:30px;
+font-family: 'Press Start 2P', cursive;
+color: lightblue;
+}
+
+.listtwo{
+left: 0px;
+line-height: 200px;
+margain-top: -100px;
+position: absolute;
+text-align: center;
+top:50%;
+width:100%;
+font-size: 30px;
+font-family: 'Press Start 2P', cursive;
+color:aqua;
+}
+
+.listthree{
+  left: 0;
+line-height: 200px;
+margain-top: -100px;
+position: absolute;
+text-align: center;
+top:60%;
+width:100%;
+font-size: 30px;
+font-family: 'Press Start 2P', cursive;
+color:purple;
 }
