@@ -1,7 +1,7 @@
 function Alien(x, y) {
   this.x = x;
   this.y = y;
-  this.scl = 200;
+  this.scl = 70;
   this.health = 100;
   this.keepspawn = false;
 

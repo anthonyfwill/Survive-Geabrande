@@ -9,6 +9,7 @@ let spaceship,
   alien,
   player,
   enemy,
+  backgroundMusic,
   bulletPlayer,
   bulletalien1,
   bulletalien2,
@@ -33,7 +34,7 @@ let spaceship,
   dyingAlien,
   alienBullet,
   startFight,
-    restartButton,
+  restartButton,
   alienShooting;
 
 function preload() {
@@ -65,6 +66,7 @@ function preload() {
   alienShooting = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fwilliam-robinson-gun-alien-firing-animation.gif?v=1596044928572"
   );
+  //backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
 }
 
 function setup() {
@@ -72,12 +74,14 @@ function setup() {
   spawn = true;
   moreLasers = false;
   startFight = false;
+  //backgroundMusic.setVolume(0.10);
+  //backgroundMusic.loop();
   aSpd = 0;
   score = 0;
   timer = 0;
   power = 50;
   health = 100;
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1000, 1000);
   enemies = [];
   lasers = [];
   elasers = [];

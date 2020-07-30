@@ -1,7 +1,7 @@
 //Function for placing image of ship and allowing it to move left and right
 function Ship() {
   this.x = windowWidth / 2;
-  this.scl = 80;
+  this.scl = 50;
   this.y = windowHeight - this.scl;
 
   this.v = 0;
