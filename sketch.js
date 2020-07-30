@@ -66,9 +66,7 @@ function preload() {
   alienShooting = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fwilliam-robinson-gun-alien-firing-animation.gif?v=1596044928572"
   );
-  backgroundMusic = loadSound(
-  "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684"
-);
+  backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
 }
 
 function setup() {
@@ -76,8 +74,9 @@ function setup() {
   spawn = true;
   moreLasers = false;
   startFight = false;
-  backgroundMusic.setVolume(0.10);
+  backgroundMusic.setVolume(0.20);
   backgroundMusic.loop();
+  backgroundMusic.play();
   aSpd = 0;
   score = 0;
   timer = 0;
@@ -101,7 +100,6 @@ function setup() {
 }
 
 function draw() {
-  backgroundMusic.play();
   background(0);
   image(bg, 0, 0, width, height);
   stroke(255);

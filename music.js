@@ -1,1 +1,1 @@
-backgroundMusic.play();
+//backgroundMusic.play();
