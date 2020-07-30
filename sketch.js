@@ -3,7 +3,7 @@
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
           loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, enemyLaser, delay
-          EnemyLaser, textFont*/
+          EnemyLaser, textFont, loadFont*/
 
 let spaceship,
   alien,
@@ -36,7 +36,8 @@ let spaceship,
   startFight,
   restartButton,
   alienShooting,
-  gameIsOver;
+  gameIsOver,
+  pressStartToPlay;
 
 function preload() {
   spaceship = loadImage(
@@ -69,6 +70,7 @@ function preload() {
   );
   gameIsOver = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-46cfb1ea52e0.gif?v=1596130801819");
   backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
+  //pressStartToPlay = loadFont("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FPress_Start_2P.zip?v=1596132041204");
 }
 
 function setup() {
@@ -99,17 +101,17 @@ function setup() {
   p[2] = new moreBullets();
   player = new Ship();
   
-  textFont()
+  //textFont(pressStartToPlay);
   
 }
 
 function draw() {
   background(0);
   image(bg, 0, 0, width, height);
-  stroke(255);
+  stroke(255, 100, 100);
   gameOver = health <= 0 ? true : false;
 
-
+  strokeWeight(10);
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
   text(`score: ${score}`, 10, 100);

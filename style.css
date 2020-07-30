@@ -31,29 +31,3 @@ font-size:30px;
 font-family: 'Press Start 2P', cursive;
 color: lightblue;
 }
-
-.listtwo{
-left: 0px;
-line-height: 200px;
-margain-top: -100px;
-position: absolute;
-text-align: center;
-top:50%;
-width:100%;
-font-size: 30px;
-font-family: 'Press Start 2P', cursive;
-color:aqua;
-}
-
-.listthree{
-  left: 0;
-line-height: 200px;
-margain-top: -100px;
-position: absolute;
-text-align: center;
-top:60%;
-width:100%;
-font-size: 30px;
-font-family: 'Press Start 2P', cursive;
-color:purple;
-}
