@@ -35,7 +35,8 @@ let spaceship,
   alienBullet,
   startFight,
   restartButton,
-  alienShooting;
+  alienShooting,
+  gameIsOver;
 
 function preload() {
   spaceship = loadImage(
@@ -66,6 +67,7 @@ function preload() {
   alienShooting = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fwilliam-robinson-gun-alien-firing-animation.gif?v=1596044928572"
   );
+  gameIsOver = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-46cfb1ea52e0.gif?v=1596130801819");
   backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
 }
 
@@ -88,7 +90,7 @@ function setup() {
   elasers = [];
   p = [];
   for (var x = 0; x < 5; x++) {
-    enemies[x] = new Alien(x * 90, 0);
+    enemies[x] = new Alien(random(0, 1000), 0);
     elasers[x] = new EnemyLaser(enemies[x]);
   }
 
@@ -108,7 +110,7 @@ function draw() {
 
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
-  text(`score: ${score}`, 10, 75);
+  text(`score: ${score}`, 10, 100);
   //Spawns more Aliens when you kill them
   if (!gameOver) {
     timer += 0.015;
@@ -194,6 +196,12 @@ function draw() {
     
       
     }
+  if(health === 0){
+    gameOver = true;
+    if(gameOver === true){
+      image(gameIsOver, 500, 500, 100, 100);
+    }
+  }
   
 }
 
