@@ -37,7 +37,8 @@ let spaceship,
   restartButton,
   alienShooting,
   gameIsOver,
-  pressStartToPlay;
+  pressStartToPlay,
+  shipShooting;
 
 function preload() {
   spaceship = loadImage(
@@ -70,7 +71,7 @@ function preload() {
   );
   gameIsOver = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-46cfb1ea52e0.gif?v=1596130801819");
   backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
-  //pressStartToPlay = loadFont("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FPress_Start_2P.zip?v=1596132041204");
+  shipShooting = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fscifi002.mp3?v=1595955003412");
 }
 
 function setup() {
@@ -215,7 +216,7 @@ function draw() {
 //pushes a new laser whenever space is pressed
 function keyPressed() {
   if (keyCode === 32) {
-    //soundBullet.play();
+    shipShooting.play();
     lasers.push(new Laser(player.x));
     startFight = true;
     if (moreLasers) {

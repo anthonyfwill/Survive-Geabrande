@@ -8,7 +8,7 @@ function EnemyLaser(alien) {
   };
   this.show = function() {
     //if(this.keepspawn === true){
-      image(alienBullet, this.x, this.y, 20, 20);
+      image(alienBullet, this.x, this.y, 40, 40);
       alien.keepspawn = true;
       if(this.y >= 1000 || this.x > player.x && this.x < player.x + player.scl && this.y > player.y){
         this.y = alien.y + alien.scl;
