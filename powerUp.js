@@ -10,7 +10,6 @@ class PowerUp {
     
     image(puImage, this.x, this.y, this.scl, this.scl);
     
-    this.x += this.vx;
-    this.y -= this.vy;
+    this.x += this.vx;    this.y -= this.vy;
   }
 }

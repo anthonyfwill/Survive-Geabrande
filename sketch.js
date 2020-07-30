@@ -105,12 +105,10 @@ function draw() {
   stroke(255);
   gameOver = health <= 0 ? true : false;
 
-  text(`timer: ${Math.floor(timer)}`, 10, 100);
+
   text(`power: ${power}`, 10, 150);
   text(`health: ${health}`, 10, 125);
   text(`score: ${score}`, 10, 75);
-  text(`bullet speed: ${aSpd + 5}`, 10, 175);
-  text(`gameover: ${gameOver}`, 10, 200);
   //Spawns more Aliens when you kill them
   if (!gameOver) {
     timer += 0.015;
