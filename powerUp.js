@@ -1,7 +1,7 @@
 class PowerUp {
   constructor(){
     this.x = random(-3000, 0);
-    this.y = random(200, windowHeight - 50);
+    this.y = random(200, 1000 - 50);
     this.vx = random(2, 3);
     this.vy = random(0, 0.1);
     this.scl = 50;
