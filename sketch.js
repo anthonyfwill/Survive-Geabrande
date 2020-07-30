@@ -41,7 +41,7 @@ function preload() {
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F8-bit-spaceship-png-1.png?v=1595872548652"
   );
   alien = loadImage(
-    "https://cdnb.artstation.com/p/assets/images/images/006/503/665/original/william-robinson-gun-alien-passive-gif.gif?1499108527"
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fwilliam-robinson-gun-alien-passive-gif.gif?v=1596085298751"
   );
   alien.delay(100);
   bulletPlayer = loadImage(
@@ -51,7 +51,7 @@ function preload() {
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fexplosion.png?v=1595953681818"
   );
   puImage = loadImage(
-    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FpowerUp.png?v=1595956551785"
+    "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fpowerupgif.gif?v=1596085504291"
   );
   bg = loadImage(
     "https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2F13c6008f2afbd4711d08898e19835a8c.gif?v=1595956002173"

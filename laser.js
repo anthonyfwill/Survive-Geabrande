@@ -8,6 +8,6 @@ function Laser(xpos, left = 0, right = 0) {
     this.x += left;
   };
   this.show = function() {
-    image(bulletPlayer, this.x, this.y, 20, 20);
+    image(bulletPlayer, this.x, this.y, 50, 50);
   };
 } 
