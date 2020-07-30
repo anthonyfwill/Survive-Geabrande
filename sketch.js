@@ -3,7 +3,7 @@
           collideCircleCircle, text, textSize, mouseX, mouseY, strokeWeight, line, random,
           mouseIsPressed, translate, point, rotate, createVector, windowWidth, windowHeight, noStroke, sqrt, keyIsDown, soundFormats, 
           loadSound, Alien, Ship, Laser loaded, PowerUp, fasterBullets, moreBullets, increasedPower, enemyLaser, delay
-          EnemyLaser*/
+          EnemyLaser, textFont*/
 
 let spaceship,
   alien,
@@ -83,7 +83,7 @@ function setup() {
   score = 0;
   timer = 0;
   power = 50;
-  health = 100;
+  health = 10;
   createCanvas(1000, 1000);
   enemies = [];
   lasers = [];
@@ -98,6 +98,8 @@ function setup() {
   p[1] = new fasterBullets();
   p[2] = new moreBullets();
   player = new Ship();
+  
+  textFont()
   
 }
 
@@ -199,7 +201,10 @@ function draw() {
   if(health === 0){
     gameOver = true;
     if(gameOver === true){
-      image(gameIsOver, 500, 500, 100, 100);
+      image(gameIsOver, 300, 300, 500, 500);
+      if(mouseIsPressed){
+        setup();
+      }
     }
   }
   
