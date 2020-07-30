@@ -91,8 +91,7 @@ function setup() {
   p[1] = new fasterBullets();
   p[2] = new moreBullets();
   player = new Ship();
-  //soundBullet = loadSound('scifi002.mp3', loaded);
-  //soundBullet.setVolume(0.5);
+  
 }
 
 function draw() {
