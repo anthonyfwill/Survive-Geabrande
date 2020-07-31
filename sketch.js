@@ -268,20 +268,10 @@ function fixEverything(){
   spawn = true;
   moreLasers = false;
   startFight = false;
-  backgroundMusic.loop();
-  backgroundMusic.play();
   aSpd = 0;
   score = 0;
   timer = 0;
   power = 50;
   health = 10;
-  for (var x = 0; x < 5; x++) {
-    enemies[x] = new Alien(random(0, 1000), 0);
-    elasers[x] = new EnemyLaser(enemies[x]);
-  }
-
-  p[0] = new increasedPower();
-  p[1] = new fasterBullets();
-  p[2] = new moreBullets();
-  player = new Ship();
+  createCanvas(1000, 1000);
 }
