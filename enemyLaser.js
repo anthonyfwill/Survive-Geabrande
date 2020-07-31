@@ -1,7 +1,7 @@
 function EnemyLaser(alien) {
   this.x = alien.x + 25;
   this.y = alien.y + alien.scl;
-  this.v = 5 + Math.floor(Math.log(score));
+  this.v = (score === 0) ? 5: 5 + Math.floor(Math.log(score));
 
   this.update = function() {
     this.y += this.v;
