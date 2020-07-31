@@ -39,8 +39,7 @@ let spaceship,
   gameIsOver,
   pressStartToPlay,
   shipShooting,
-  alienDying,
-  caughtPowerUp;
+  startAgain;
 
 function preload() {
   spaceship = loadImage(
@@ -74,8 +73,7 @@ function preload() {
   gameIsOver = loadImage("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fezgif-6-46cfb1ea52e0.gif?v=1596130801819");
   backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
   shipShooting = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fscifi002.mp3?v=1595955003412");
-  alienDying = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FRobloxDeathSoundOOFSoundEffectmp3.mp3?v=1596153048354");
-  caughtPowerUp = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FZAWARUDOmp3.mp3?v=1596153478670");
+  startAgain = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FZAWARUDOmp3.mp3?v=1596153478670");
 }
 
 function setup() {
@@ -84,7 +82,7 @@ function setup() {
   moreLasers = false;
   startFight = false;
   backgroundMusic.setVolume(0.20);
-  alienDying.setVolume(0.1);
+  startAgain.setVolume(0.5);
   backgroundMusic.loop();
   backgroundMusic.play();
   aSpd = 0;
@@ -158,7 +156,6 @@ function draw() {
     for (var j = enemies.length - 1; j >= 0; j--) {
       if (enemies[j].health <= 0) {
         enemies[j].dead();
-        alienDying.play();
         test = j;
         setTimeout(removeIt, 1000);
       } else {
@@ -187,7 +184,7 @@ function draw() {
       }
       if (contact(lasers[i].x, lasers[i].y, p) >= 0) {
         p[contact(lasers[i].x, lasers[i].y, p)].activate();
-        caughtPowerUp.play();
+    
         p.splice(contact(lasers[i].x, lasers[i].y, p), 1);
       }
 
@@ -213,6 +210,8 @@ function draw() {
     if(gameOver === true){
       image(gameIsOver, 300, 300, 500, 500);
       if(mouseIsPressed){
+        backgroundMusic.stop();
+        startAgain.play();
         setup();
       }
     }
