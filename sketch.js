@@ -77,7 +77,6 @@ function preload() {
   shipShooting = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fscifi002.mp3?v=1595955003412");
   startAgain = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FZAWARUDOmp3.mp3?v=1596153478670");
   gameOverMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FSuper%20Mario%20Bros%20Gamer%20Over%202%20Sound%20Effect.mp3?v=1596172417104");
-  playLost = false;
 }
 
 function setup() {
@@ -85,6 +84,7 @@ function setup() {
   spawn = true;
   moreLasers = false;
   startFight = false;
+  playLost = false;
   backgroundMusic.setVolume(0.20);
   startAgain.setVolume(0.5);
   gameOverMusic.setVolume(0.1);
@@ -223,7 +223,7 @@ function draw() {
       if(mouseIsPressed){
         gameOverMusic.stop();
         startAgain.play();
-        fixEverything();
+        setup();
       }
     }
   }
@@ -261,17 +261,4 @@ function removeIt() {
   enemies.splice(test, 1);
 
   test = 100;
-}
-
-function fixEverything(){
-  gameOver = false;
-  spawn = true;
-  moreLasers = false;
-  startFight = false;
-  aSpd = 0;
-  score = 0;
-  timer = 0;
-  power = 50;
-  health = 10;
-  createCanvas(1000, 1000);
 }
