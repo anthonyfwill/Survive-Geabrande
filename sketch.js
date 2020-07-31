@@ -87,7 +87,7 @@ function setup() {
   startFight = false;
   backgroundMusic.setVolume(0.20);
   startAgain.setVolume(0.5);
-  gameOverMusic.setVolume(0.01);
+  gameOverMusic.setVolume(0.1);
   backgroundMusic.loop();
   backgroundMusic.play();
   aSpd = 0;
@@ -221,10 +221,9 @@ function draw() {
         playLost = true;
       }
       if(mouseIsPressed){
-        gameOverMusic.noLoop();
         gameOverMusic.stop();
         startAgain.play();
-        setup();
+        fixEverything();
       }
     }
   }
@@ -262,4 +261,35 @@ function removeIt() {
   enemies.splice(test, 1);
 
   test = 100;
+}
+
+function fixEverything(){
+  gameOver = false;
+  spawn = true;
+  moreLasers = false;
+  startFight = false;
+  backgroundMusic.setVolume(0.20);
+  startAgain.setVolume(0.5);
+  gameOverMusic.setVolume(0.1);
+  backgroundMusic.loop();
+  backgroundMusic.play();
+  aSpd = 0;
+  score = 0;
+  timer = 0;
+  power = 50;
+  health = 10;
+  createCanvas(1000, 1000);
+  enemies = [];
+  lasers = [];
+  elasers = [];
+  p = [];
+  for (var x = 0; x < 5; x++) {
+    enemies[x] = new Alien(random(0, 1000), 0);
+    elasers[x] = new EnemyLaser(enemies[x]);
+  }
+
+  p[0] = new increasedPower();
+  p[1] = new fasterBullets();
+  p[2] = new moreBullets();
+  player = new Ship();
 }
