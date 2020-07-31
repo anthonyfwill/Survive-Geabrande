@@ -75,7 +75,7 @@ function preload() {
   backgroundMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FEpic%20Sci-Fi%20music%20-%20Titanium%20Sky.mp3?v=1596126116684");
   shipShooting = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Fscifi002.mp3?v=1595955003412");
   startAgain = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FZAWARUDOmp3.mp3?v=1596153478670");
-  gameOverMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2Ff110bdf6-83ea-4102-a2d6-396da3461187_SuperMarioBrosGameOverSoundeffectSlowMotionmp3.mp3?v=1596171347435");
+  gameOverMusic = loadSound("https://cdn.glitch.com/f110bdf6-83ea-4102-a2d6-396da3461187%2FSuper%20Mario%20Bros%20Game%20Over.wav?v=1596172119056");
 }
 
 function setup() {
@@ -85,7 +85,7 @@ function setup() {
   startFight = false;
   backgroundMusic.setVolume(0.20);
   startAgain.setVolume(0.5);
-  gameOverMusic.setVolume(0.05);
+  gameOverMusic.setVolume(0.1);
   backgroundMusic.loop();
   backgroundMusic.play();
   aSpd = 0;
