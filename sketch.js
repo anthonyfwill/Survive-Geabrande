@@ -268,9 +268,6 @@ function fixEverything(){
   spawn = true;
   moreLasers = false;
   startFight = false;
-  backgroundMusic.setVolume(0.20);
-  startAgain.setVolume(0.5);
-  gameOverMusic.setVolume(0.1);
   backgroundMusic.loop();
   backgroundMusic.play();
   aSpd = 0;
@@ -278,11 +275,6 @@ function fixEverything(){
   timer = 0;
   power = 50;
   health = 10;
-  createCanvas(1000, 1000);
-  enemies = [];
-  lasers = [];
-  elasers = [];
-  p = [];
   for (var x = 0; x < 5; x++) {
     enemies[x] = new Alien(random(0, 1000), 0);
     elasers[x] = new EnemyLaser(enemies[x]);
